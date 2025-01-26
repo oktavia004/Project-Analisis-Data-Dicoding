@@ -10,17 +10,8 @@ sns.set(style="whitegrid")
 # Fungsi untuk membaca dan membersihkan data
 @st.cache_data
 def load_data():
-    current_dir = os.path.dirname(__file__)
-
-    day_csv_path = os.path.join(current_dir, "day.csv")
-    hour_csv_path = os.path.join(current_dir, "hour.csv")
-
-    st.write("Current Directory:", current_dir)
-    st.write("Day CSV Path:", day_csv_path)
-    st.write("Hour CSV Path:", hour_csv_path)
-    
-    days_df = pd.read_csv(day_csv_path)
-    hours_df = pd.read_csv(hour_csv_path)
+    days_df = pd.read_csv("Dashboard/day.csv")
+    hours_df = pd.read_csv("Dashboard/hour.csv")
     
     # Cleaning days_df
     days_df.dropna(inplace=True)
@@ -35,11 +26,7 @@ def load_data():
     return days_df, hours_df
 
 # Memuat data
-try:
-    days_df, hours_df = load_data()
-except FileNotFoundError as e:
-    st.error(f"Error: {e}")
-    st.stop()
+days_df, hours_df = load_data()
 
 # Judul Dashboard
 st.title("Dashboard Penyewaan Sepeda")
